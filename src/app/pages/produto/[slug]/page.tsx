@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
@@ -36,9 +36,8 @@ const colorMap: Record<string, string> = {
 };
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
-  // Podemos usar o slug para buscar o produto correto em uma API ou banco de dados
-  // const { slug } = params;
-  // console.log('Slug do produto:', slug);
+  // Usar o slug para identificar qual produto mostrar (em uma implementação real)
+  const slug = params.slug;
   
   const [selectedImage, setSelectedImage] = useState(productData.gallery[0]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -46,6 +45,13 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [quantity, setQuantity] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  
+  // Em uma implementação real, buscaríamos os dados do produto baseados no slug
+  useEffect(() => {
+    // Simulação de busca de produto (em um cenário real, buscaria da API)
+    console.log(`Carregando produto com slug: ${slug}`);
+    // fetchProduct(slug).then(data => setProductData(data));
+  }, [slug]);
   
   const addItem = useCartStore((state) => state.addItem);
 
