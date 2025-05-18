@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { ShoppingCart, Minus, Plus, ArrowLeft, Trash2 } from 'lucide-react';
 import { useCartStore } from '@/store/cart';
 
@@ -74,11 +73,7 @@ export default function CartPage() {
           </div>
         ) : items.length === 0 ? (
           // Carrinho vazio
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16 max-w-lg mx-auto"
-          >
+          <div className="text-center py-16 max-w-lg mx-auto">
             <ShoppingCart size={64} className="mx-auto mb-6 text-gray-400" />
             <h2 className="text-2xl font-medium mb-4">Seu carrinho está vazio</h2>
             <p className="text-gray-600 mb-8">
@@ -90,7 +85,7 @@ export default function CartPage() {
             >
               Continuar Comprando
             </Link>
-          </motion.div>
+          </div>
         ) : (
           // Carrinho com itens
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -98,15 +93,18 @@ export default function CartPage() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                 {items.map((item) => (
-                  <motion.div 
+                  <div 
                     key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
                     className="p-4 border-b border-gray-100 flex items-center"
                   >
-                    {/* Imagem do produto - substituída por cor de fundo */}
-                    <div className="w-20 h-20 rounded-md overflow-hidden relative flex-shrink-0 bg-blue-500 flex items-center justify-center">
-                      <span className="text-white font-bold text-xl">{item.name.charAt(0)}</span>
+                    {/* Imagem do produto */}
+                    <div className="w-20 h-20 rounded-md overflow-hidden relative flex-shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover object-center"
+                      />
                     </div>
 
                     {/* Detalhes do produto */}
@@ -146,7 +144,7 @@ export default function CartPage() {
                     >
                       <Trash2 size={18} />
                     </button>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
@@ -190,7 +188,7 @@ export default function CartPage() {
                 </a>
                 
                 <p className="text-sm text-gray-500 mt-4 text-center">
-                  Ao clicar em "Finalizar pelo WhatsApp", você será redirecionado para o WhatsApp 
+                  Ao clicar em &quot;Finalizar pelo WhatsApp&quot;, você será redirecionado para o WhatsApp 
                   para finalizar seu pedido diretamente conosco.
                 </p>
               </div>

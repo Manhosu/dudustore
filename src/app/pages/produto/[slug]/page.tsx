@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
 import { useCartStore } from '@/store/cart';
 import toast from 'react-hot-toast';
@@ -37,6 +36,10 @@ const colorMap: Record<string, string> = {
 };
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
+  // Podemos usar o slug para buscar o produto correto em uma API ou banco de dados
+  // const { slug } = params;
+  // console.log('Slug do produto:', slug);
+  
   const [selectedImage, setSelectedImage] = useState(productData.gallery[0]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
