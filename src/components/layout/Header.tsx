@@ -129,7 +129,7 @@ const Header = () => {
           <button 
             className="md:hidden text-white focus:outline-none z-10"
             onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? &quot;Fechar menu&quot; : &quot;Abrir menu&quot;}
+            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
