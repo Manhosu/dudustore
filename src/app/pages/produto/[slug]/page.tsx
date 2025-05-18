@@ -35,7 +35,8 @@ const colorMap: Record<string, string> = {
   'Vermelho': 'bg-red-600',
 };
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+// Tipagem de acordo com o padrão do Next.js App Router
+export default function Page({ params }: { params: { slug: string } }) {
   // Usar o slug para identificar qual produto mostrar (em uma implementação real)
   const slug = params.slug;
   

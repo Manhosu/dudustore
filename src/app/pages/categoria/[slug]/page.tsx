@@ -1,9 +1,6 @@
-'use client';
-
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import ProductCard from '@/components/product/ProductCard';
+import ProductList from '@/components/product/ProductList';
 
 // Dados de exemplo para produtos
 const allProducts = [
@@ -43,12 +40,11 @@ const allProducts = [
     slug: "bone-snapback-classic",
     category: "acessorios"
   },
-  // Adicionando mais produtos para ter uma página com mais itens
   {
     id: "5",
     name: "Camiseta Estampada Graphic",
     price: 79.90,
-    image: "/images/product-1.jpg", // Reutilizando imagem para exemplo
+    image: "/images/product-1.jpg",
     slug: "camiseta-estampada-graphic",
     category: "camisetas"
   },
@@ -57,7 +53,7 @@ const allProducts = [
     name: "Calça Jeans Premium",
     price: 179.90,
     originalPrice: 219.90,
-    image: "/images/product-2.jpg", // Reutilizando imagem para exemplo
+    image: "/images/product-2.jpg",
     slug: "calca-jeans-premium",
     isSale: true,
     category: "calcas"
@@ -66,7 +62,7 @@ const allProducts = [
     id: "7",
     name: "Tênis Runners Pro",
     price: 299.90,
-    image: "/images/product-3.jpg", // Reutilizando imagem para exemplo
+    image: "/images/product-3.jpg",
     slug: "tenis-runners-pro",
     category: "tenis"
   },
@@ -74,7 +70,7 @@ const allProducts = [
     id: "8",
     name: "Corrente Prata Urban",
     price: 129.90,
-    image: "/images/product-4.jpg", // Reutilizando imagem para exemplo
+    image: "/images/product-4.jpg",
     slug: "corrente-prata-urban",
     isNew: true,
     category: "acessorios"
@@ -89,7 +85,18 @@ const categoryMap: Record<string, string> = {
   "novidades": "Novidades"
 };
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
+export function generateStaticParams() {
+  return [
+    { slug: 'todos' },
+    { slug: 'camisetas' },
+    { slug: 'calcas' },
+    { slug: 'tenis' },
+    { slug: 'acessorios' },
+    { slug: 'novidades' }
+  ];
+}
+
+export default function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   
   let filteredProducts = allProducts;
@@ -122,18 +129,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Grade de produtos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-            >
-              <ProductCard {...product} />
-            </motion.div>
-          ))}
-        </div>
+        <ProductList products={filteredProducts} />
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
